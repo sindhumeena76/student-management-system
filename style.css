@@ -1,0 +1,92 @@
+body{
+font-family:Arial;
+background:#f4f6f9;
+margin:0;
+padding:0;
+background-color: aqua;
+}
+
+.container{
+width:80%;
+margin:auto;
+margin-top:40px;
+}
+
+h1{
+text-align:center;
+}
+
+form{
+background:white;
+padding:20px;
+border-radius:8px;
+margin-bottom:25px;
+box-shadow:0 2px 10px rgba(0,0,0,0.1);
+}
+
+input{
+padding:10px;
+margin:8px;
+width:22%;
+border:1px solid #ccc;
+border-radius:5px;
+}
+
+button{
+padding:10px 15px;
+border:none;
+background:#007bff;
+color:white;
+border-radius:5px;
+cursor:pointer;
+}
+
+button:hover{
+background:#0056b3;
+}
+
+.delete{
+background:red;
+}
+
+.logout{
+float:right;
+background:black;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+background:white;
+}
+
+th,td{
+padding:12px;
+border-bottom:1px solid #ddd;
+text-align:center;
+}
+
+th{
+background:#007bff;
+color:white;
+}
+
+.error{
+color:red;
+margin-top:10px;
+}
+
+.login-box{
+width:300px;
+margin:120px auto;
+background:white;
+padding:30px;
+text-align:center;
+border-radius:8px;
+box-shadow:0 2px 10px rgba(0,0,0,0.1);
+}
+
+.login-box input{
+width:90%;
+margin:10px 0;
+}

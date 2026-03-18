@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Student Dashboard</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Student Management Dashboard</h1>
+
+<button class="logout" onclick="logout()">Logout</button>
+
+<form id="studentForm">
+
+<input type="text" id="name" placeholder="Student Name">
+<input type="text" id="roll" placeholder="Roll Number">
+<input type="text" id="course" placeholder="Course">
+<input type="number" id="marks" placeholder="Marks">
+
+<button type="submit">Add Student</button>
+
+<p class="error" id="errorMsg"></p>
+
+</form>
+
+<table>
+
+<thead>
+<tr>
+<th>Name</th>
+<th>Roll</th>
+<th>Course</th>
+<th>Marks</th>
+<th>Action</th>
+</tr>
+</thead>
+
+<tbody id="studentList"></tbody>
+
+</table>
+
+</div>
+
+<script>
+
+if(localStorage.getItem("loggedIn")!=="true"){
+window.location.href="login.html";
+}
+
+let students=JSON.parse(localStorage.getItem("students"))||[];
+
+function displayStudents(){
+
+let list=document.getElementById("studentList");
+list.innerHTML="";
+
+students.forEach((s,index)=>{
+
+list.innerHTML+=`
+<tr>
+<td>${s.name}</td>
+<td>${s.roll}</td>
+<td>${s.course}</td>
+<td>${s.marks}</td>
+<td><button onclick="deleteStudent(${index})" class="delete">Delete</button></td>
+</tr>
+`;
+
+});
+
+}
+
+document.getElementById("studentForm").addEventListener("submit",function(e){
+
+e.preventDefault();
+
+let name=document.getElementById("name").value.trim();
+let roll=document.getElementById("roll").value.trim();
+let course=document.getElementById("course").value.trim();
+let marks=document.getElementById("marks").value.trim();
+
+let error=document.getElementById("errorMsg");
+error.textContent="";
+
+let pattern=/^[A-Za-z ]+$/;
+
+if(!pattern.test(name)){
+error.textContent="Name must contain only letters";
+return;
+}
+
+if(roll===""){
+error.textContent="Roll number required";
+return;
+}
+
+if(course===""){
+error.textContent="Course required";
+return;
+}
+
+if(marks<0 || marks>100){
+error.textContent="Marks must be 0-100";
+return;
+}
+
+students.push({name,roll,course,marks});
+
+localStorage.setItem("students",JSON.stringify(students));
+
+displayStudents();
+
+this.reset();
+
+});
+
+function deleteStudent(index){
+
+students.splice(index,1);
+
+localStorage.setItem("students",JSON.stringify(students));
+
+displayStudents();
+
+}
+
+function logout(){
+
+localStorage.removeItem("loggedIn");
+
+window.location.href="login.html";
+
+}
+
+displayStudents();
+
+</script>
+
+</body>
+</html>
